@@ -108,6 +108,7 @@ source $ZSH/oh-my-zsh.sh
 
 
 # my setting
+# 1. general
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse"
@@ -120,32 +121,49 @@ fffq() {
   cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
 }
 
-# python3 bin
-PATH=$PATH:$HOME/.local/bin
-
-# go
-PATH=$PATH:/usr/local/go/bin
-
 # alias
 alias v=nvim
 
+# functions
 # proxy 
 function setproxy() {
     export {http,https}_proxy='127.0.0.1:15732'
     git config --global http.proxy http://127.0.0.1:15732 
     git config --global https.proxy http://127.0.0.1:15732 
 }
-
 function unsetproxy() {
     unset {http,https}_proxy
     git config --global --unset http.proxy
     git config --global --unset https.proxy
 }
+# lock current console
+function lock() {
+  sh ~/scripts/vlo.sh
+}
 
+
+# 2. Work environment specific
+# Export
+# quick change directory
+export c='/mnt/c'
+export d='/mnt/d'
+export e='/mnt/e'
+export wsc='/mnt/d/我的坚果云/我的坚果云/workspace_clound'
+# default editor
+export EDITOR='nvim'
+
+# Path import
+# python3 bin
+PATH=$PATH:$HOME/.local/bin
+# go
+PATH=$PATH:/usr/local/go/bin
+# lua language server add to path
+PATH=$PATH:$HOME/lua-language-server/bin/
 # scripts
 PATH=$PATH:~/scripts/
 
-# greeting
+
+# 3. greeting
 printf  "\033[31m\
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢁⣿⣿⣿⣿⣿⣷⡘⣆⢿⣿⣿⣇⢸⣿⣿⡇⣼⣿⣶⡌⢧⡒⣸⣿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⣼⣿⣿⣿⣿⣿⣿⣧⠹⡌⠿⠿⠿⠸⠿⠿⠃⠿⢿⣿⣷⠘⣁⠈⢴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -176,20 +194,3 @@ printf  "\033[31m\
 
 \033[0m"
 echo "\033[5;38;5;255;48;5;20mWelcome $USER!\033[m"
-
-# lock current console
-function lock() {
-  sh ~/scripts/vlo.sh
-}
-
-# quick change directory
-export c='/mnt/c'
-export d='/mnt/d'
-export e='/mnt/e'
-export wsc='/mnt/d/我的坚果云/我的坚果云/workspace_clound'
-
-# default editor
-export EDITOR='nvim'
-
-# lua language server add to path
-PATH=$PATH:$HOME/lua-language-server/bin/
