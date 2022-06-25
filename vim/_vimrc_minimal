@@ -1,0 +1,150 @@
+" NECESSARY:
+" 1. same setting
+" 2. same keybindings
+"
+" Last change: 2022-06-24
+
+
+" Basic setting
+syntax on
+filetype on
+filetype plugin on
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+let $LANG='en'
+set langmenu=en
+set tabstop=4     " A tab equals 4 spaces
+set shiftwidth=4  " The width of suojin is 4 space
+set expandtab     " Use space replace tab
+set softtabstop=4 " Del tabs one by one when use backspace
+set autoindent
+set smartindent
+set nocompatible " No compatible with vi
+set number
+set ignorecase
+filetype on
+filetype plugin on
+" set cursorline " Highlight current line
+set noundofile
+set nobackup
+set noswapfile
+set nohls                      " Cancel highlight after search
+set spr                        " Split to right when vertical split
+set sb                         " Split to bottom when horizon split
+set autoread                   " Auto refresh when file change
+set signcolumn=number          " Sign show in number column
+set completeopt-=preview       " Close preview windows
+set whichwrap=<,>,[,]          " Alow arrow keys jump between lines automatically
+set backspace=indent,eol,start " Allow backspace delete previous lines, have in `vimrc_example.vim`
+set linespace=5                " the space between lines
+set fileformat=unix
+set wildmenu
+
+" Autocommand
+autocmd filetype markdown,text setlocal textwidth=78 | setlocal nonumber
+autocmd filetype help,vim-plug,startuptime nnoremap <silent><buffer> q :exit<CR>
+autocmd filetype vim,yaml,lua,sh setlocal tabstop=2 | setlocal shiftwidth=2 | setlocal softtabstop=2
+
+" Key mapping
+let mapleader = ","
+" Buffer operation
+nnoremap <silent> <c-p> :bp!<cr>
+nnoremap <silent> <c-n> :bn!<cr>
+nnoremap <silent> <leader>d :bd<cr>
+" Window operation
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-down> <c-w>J
+nnoremap <c-up> <c-w>K
+nnoremap <c-left> <c-w>H
+nnoremap <c-right> <c-w>L
+" Yank to clipboard
+vnoremap <leader><leader>y "+y
+nnoremap <leader><leader>ay ggVG"+y
+" Paste from clipboard
+nnoremap <leader><leader>p "+p
+nnoremap <leader><leader>P "+P
+nnoremap <leader>h :Startify<cr>
+" Tab operation
+nnoremap <leader>e :tabn<cr>
+nnoremap <leader>q :tabp<cr>
+nnoremap <leader>w :tabc<cr>
+nnoremap <leader>s :w<cr>
+nnoremap <leader>cd :cd %:p:h<cr>
+
+" Gui setting
+if has("gui_running")
+  " Solve the display problem of gvim in Chinese Windows
+  source $VIMRUNTIME/delmenu.vim
+  source $VIMRUNTIME/menu.vim
+
+  " Fonts
+  " set guifont=DejavuSansMono_NF:h14:cANSI
+  " set guifontwide=Microsoft_YaHei_Mono:h14:cGB2312
+
+  " Make a clean ui
+  set guioptions-=m           " Eliminate menu
+  set guioptions-=T           " Eliminate toolbar
+  set guioptions-=L           " Eliminate left scroll bar
+  set guioptions-=r           " Eliminate right scroll bar
+  set guioptions-=b           " Eliminate bottom scroll bar
+  set guioptions-=e           " Eliminate tabline
+
+  set vb t_vb=            " Close noise
+  au GuiEnter * set t_vb= " Close window blink
+endif
+
+
+call plug#begin("D:\\Vim\\vim82\\plugged")
+Plug 'https://github.com/morhetz/gruvbox.git'
+Plug 'https://github.com/jiangmiao/auto-pairs.git'
+Plug 'https://github.com/easymotion/vim-easymotion.git'
+Plug 'https://github.com/terryma/vim-smooth-scroll.git'
+Plug 'https://github.com/godlygeek/tabular.git'
+Plug 'https://github.com/tpope/vim-surround.git'
+Plug 'https://github.com/rhysd/clever-f.vim.git'
+call plug#end()
+
+
+" if has("gui_running")
+"     colorscheme gruvbox
+" elseif
+"     set termguicolors
+"     colorscheme gruvbox
+" endif
+
+    
+" easymotion
+map ;; <Plug>(easymotion-prefix)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  ;w <Plug>(easymotion-bd-w)
+nmap ;w <Plug>(easymotion-overwin-w)
+map  ;e <Plug>(easymotion-bd-e)
+map  ;f <Plug>(easymotion-bd-f)
+nmap ;f <Plug>(easymotion-overwin-f)
+map  ;j <Plug>(easymotion-bd-jk)
+
+" vim-smooth-scroll
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+
+" auto-pairs
+let g:AutoPairsFlyMode = 1
+
+" tabular
+nnoremap <silent> <leader>/ :call CallTabular()<cr>
+func! CallTabular()
+  let x=nr2char(getchar())
+  exec "Tabularize /".x
+endfunc
+nnoremap <leader>/// :Tab /\/\/<cr>
+
+" clear-f
+let g:clever_f_across_no_line=1

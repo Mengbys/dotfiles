@@ -39,7 +39,7 @@ engine:
 # 切换菜单
 switches:
   - name: ascii_mode
-    reset: 0
+    reset: 1
     states: ["中文", "西文"]
   - name: full_shape
     states: ["半角", "全角"]
@@ -60,7 +60,7 @@ key_binder:
     - {accept: "Control+d", send: Delete, when: composing}
     - {accept: "Control+k", send: "Shift+Delete", when: composing}
     - {accept: "Control+h", send: BackSpace, when: composing}
-    - {accept: "Control+g", send: Escape, when: composing}
+    - {accept: "Control+u", send: Escape, when: composing}
     - {accept: ISO_Left_Tab, send: "Shift+Left", when: composing}
     - {accept: "Shift+Tab", send: "Shift+Left", when: composing}
     - {accept: Tab, send: "Shift+Right", when: composing}
@@ -78,17 +78,32 @@ menu:
 punctuator:
   half_shape:
     "\\" : "、"
+    "/" : "/"
     _ : [ _, —— ]
     "=" : "="
     "`" : [ "`", · ]
-  import_preset: symbols
+    "~" : "~"
+    "@" : "@"
+    "#" : "#"
+    "$" : "$"
+    "%" : "%"
+    "*" : "*"
+  symbols:
+    'vbl' : [ '~', ～, ˜, ≈, ≋, ≃, ≅, ≇, ∽, ⋍, ≌, ﹏, ﹋, ﹌ ]
+    'vpm' : [ '#', № ]
+    'vbf' : [ '%', ％, ‰, ‱ ]
+    'vwd' : [ '°', '℃', ℉ ]
+    'vch' : [ '*', ＊, ·, ・, ×, ※, ❂, ⁂, ☮, ☯, ☣ ]
+    'ix' : _
+  import_preset: symbols.custom
 
 # 处理符合特定规则的输入码
 recognizer:
   import_preset: default
   patterns:
     email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
-    punct: "^/([0-9]0?|[A-Za-z]+)$"
+    # punct: "^v([0-9]0?|[A-Za-z]+)$"
+    punct: "^[vi]([0-9]0?|[A-Za-z]+)$"
     uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
     url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
 
@@ -127,3 +142,4 @@ abbr:
   enable_completion: false
   enable_sentence: false
   initial_quality: 99
+
