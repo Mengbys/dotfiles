@@ -1,6 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Maintainer: LXH
-"  Last change: 2022-06-24
+"  Last change: 2022-06-29
 "
 "  CONTENTS:
 "  1. Basic setting
@@ -48,6 +48,11 @@ set backspace=indent,eol,start " Allow backspace delete previous lines, have in 
 set linespace=0                " the space between lines
 set fileformat=unix
 set wildmenu
+set mouse=a
+if has('win32')
+  let &pythonthreedll = 'D:/python39/python39.dll'
+  let &pythonthreehome = 'D:/python39'
+endif
 
 " Autocommand
 " autocmd filetype markdown,text setlocal textwidth=78
@@ -56,7 +61,7 @@ autocmd filetype startify setlocal nowrap
 autocmd FileType startify set showtabline=0 | autocmd BufLeave <buffer> set showtabline=2
 autocmd FileType startify set laststatus=0 | autocmd BufLeave <buffer> set laststatus=2
 autocmd FileType startify set noruler | autocmd BufLeave <buffer> set ruler
-autocmd FileType markdown setlocal list | setlocal listchars=trail:\ 
+autocmd FileType markdown setlocal list | setlocal listchars=trail:\
 
 " Key mapping
 let mapleader = ","
@@ -80,9 +85,6 @@ nnoremap <leader><leader>ay ggVG"+y
 nnoremap <leader><leader>p "+p
 nnoremap <leader><leader>P "+P
 nnoremap <leader>h :Startify<cr>
-" inoremap <c-e> <end>
-" nnoremap <cr> I<cr><esc>
-" nnoremap <bs> I<bs><esc>
 " Tab operation
 nnoremap <leader>e :tabn<cr>
 nnoremap <leader>q :tabp<cr>
@@ -119,7 +121,12 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use vim-plug install plugins
 " Change the dir below when change platform
-call plug#begin("D:\\Vim\\vim82\\plugged")
+if has('win32')
+  let s:plugin_install_dir="D:/Vim/vim90/plugged"
+elseif has('linux')
+  let s:plugin_install_dir="~/.vim/plugged/"
+endif
+call plug#begin(s:plugin_install_dir)
 " -->Colorscheme
 Plug 'https://github.com/altercation/vim-colors-solarized.git'
 Plug 'https://github.com/overcache/NeoSolarized.git'
@@ -159,6 +166,8 @@ Plug 'https://github.com/tpope/vim-commentary.git'
 " -->File icon
 " Plug 'https://github.com/ryanoasis/vim-devicons.git'
 " -->File search
+" Plug 'https://github.com/junegunn/fzf.git', { 'do': { -> fzf#install() } }
+" Plug 'https://github.com/junegunn/fzf.vim.git'
 Plug 'https://github.com/Yggdroot/LeaderF.git', { 'do': ':LeaderfInstallCExtension' }
 " -->Code completion
 " Plug 'ycm-core/YouCompleteMe'
@@ -175,26 +184,25 @@ Plug 'https://github.com/liuchengxu/vista.vim'
 " -->Select region easily
 Plug 'https://github.com/terryma/vim-expand-region.git'
 " -->Add a 'line' to wenben object
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-line'
+Plug 'https://github.com/kana/vim-textobj-user'
+Plug 'https://github.com/kana/vim-textobj-line'
 " -->More useful f,F,t,T
 Plug 'https://github.com/rhysd/clever-f.vim.git'
 " -->Set relativenumber when needed
 Plug 'https://github.com/jeffkreeftmeijer/vim-numbertoggle.git'
 " -->Focus mode
 Plug 'https://github.com/junegunn/goyo.vim'
-" Plug 'https://github.com/amix/vim-zenroom2'
 " -->Use LSP to check the code or make completion
 Plug 'https://github.com/prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-" Plug 'prabirshrestha/asyncomplete-file.vim'
+Plug 'https://github.com/prabirshrestha/asyncomplete.vim'
+Plug 'https://github.com/prabirshrestha/asyncomplete-lsp.vim'
+Plug 'https://github.com/prabirshrestha/async.vim'
+Plug 'https://github.com/prabirshrestha/asyncomplete-ultisnips.vim'
+" Plug 'https://github.com/prabirshrestha/asyncomplete-file.vim'
 " -->Show startup time
-Plug 'dstein64/vim-startuptime'
+Plug 'https://github.com/dstein64/vim-startuptime'
 " -->Markdown preview
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'https://github.com/iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 call plug#end()
 
 
@@ -203,7 +211,7 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 func! Patch_colors()
     set fillchars+=vert:\│
-    hi VertSplit cterm=NONE guibg=NONE guifg=NONE
+    hi VertSplit cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
     " hi StartifyHeader guifg=#ff0080
 endfunc
     
@@ -218,8 +226,10 @@ if has("gui_running")
     " let g:neosolarized_vertSplitBgTrans = 1
 else
     set termguicolors
-    colorscheme iceberg
-    let g:airline_theme="dark_change"
+    let g:tokyonight_style='storm'
+    let g:tokyonight_enable_italic=1
+    colorscheme tokyonight
+    let g:airline_theme="tokyonight"
 endif
 
 
@@ -312,7 +322,7 @@ autocmd FileType c,cpp setlocal commentstring=//\ %s
 
 " YCM
 " Change the dir below when change platform
-" let g:ycm_global_ycm_extra_conf = 'D:\\Vim\\.ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf = 'D:/Vim/.ycm_extra_conf.py'
 " let g:ycm_seed_identifiers_with_syntax = 1 " Can complete key words
 " let g:ycm_collect_identifiers_from_tag_files = 1 " Use the tags generated by ctags
 " let g:ycm_complete_in_comments=1 " Can complete comments
@@ -349,7 +359,7 @@ let g:Lf_WindowHeight = 0.30
 " nnoremap <silent> <leader>t :TagbarToggle<cr>
 " let g:tagbar_autofocus = 1
 
-" vista // N
+" vista NY
 nnoremap <leader>t :Vista!!<cr>
 " let s:icons = {
 " \    'func': "\uf794",
@@ -403,7 +413,6 @@ endfunc
 nnoremap <leader>/// :Tab /\/\/<cr>
 
 " taboo
-" let g:taboo_tabline = 0
 " set sessionoptions+=tabpages,globals
 " let g:taboo_tab_format="%f%m"
 " let g:taboo_modified_tab_flag="+"
@@ -500,6 +509,10 @@ func! FormatCode()
   endif
 endfunc
 
+" markdown-preview
+let g:mkdp_browser = "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+let g:mkdp_port = '20000'
+
 " Compile C/C++ files
 " Run python file
 " % is filename, %< is file name without suffix
@@ -532,4 +545,3 @@ func FunctionF8()
     exec "!g++ % -o main && main"
   endif
 endfunc
-

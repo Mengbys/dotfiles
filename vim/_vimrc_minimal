@@ -2,7 +2,7 @@
 " 1. same setting
 " 2. same keybindings
 "
-" Last change: 2022-06-24
+" Last change: 2022-06-29
 
 
 " Basic setting
@@ -41,6 +41,10 @@ set backspace=indent,eol,start " Allow backspace delete previous lines, have in 
 set linespace=5                " the space between lines
 set fileformat=unix
 set wildmenu
+if has('win32')
+  let &pythonthreedll = 'D:/python39/python39.dll'
+  let &pythonthreehome = 'D:/python39'
+endif
 
 " Autocommand
 autocmd filetype markdown,text setlocal textwidth=78 | setlocal nonumber
@@ -99,7 +103,12 @@ if has("gui_running")
 endif
 
 
-call plug#begin("D:\\Vim\\vim82\\plugged")
+if has('win32')
+  let s:plugin_install_dir="D:/Vim/vim90/plugged"
+elseif has('linux')
+  let s:plugin_install_dir="~/.vim/plugged/"
+endif
+call plug#begin(s:plugin_install_dir)
 Plug 'https://github.com/morhetz/gruvbox.git'
 Plug 'https://github.com/jiangmiao/auto-pairs.git'
 Plug 'https://github.com/easymotion/vim-easymotion.git'
@@ -107,6 +116,7 @@ Plug 'https://github.com/terryma/vim-smooth-scroll.git'
 Plug 'https://github.com/godlygeek/tabular.git'
 Plug 'https://github.com/tpope/vim-surround.git'
 Plug 'https://github.com/rhysd/clever-f.vim.git'
+Plug 'https://github.com/dstein64/vim-startuptime'
 call plug#end()
 
 
@@ -148,3 +158,27 @@ nnoremap <leader>/// :Tab /\/\/<cr>
 
 " clear-f
 let g:clever_f_across_no_line=1
+
+" netrw
+" let g:netrw_liststyle=3
+nnoremap <silent> nn :Explore<cr>
+nnoremap <silent> nv :Vexplore!<cr>
+nnoremap <silent> ns :Sexplore<cr>
+nnoremap <silent> nr :Rexplore<cr>
+augroup netrw_mapping
+  autocmd!
+  autocmd filetype netrw call NetrwMapping()
+augroup END
+
+function! NetrwMapping()
+  nmap <buffer> o <cr>
+  nmap <buffer> h -
+  nmap <buffer> l <cr>
+  nmap <buffer> <left> -
+  nmap <buffer> <right> <cr>
+  nmap <buffer> <c-h> <c-w>h
+  nmap <buffer> <c-l> <c-w>l
+  nmap <buffer> <tab> mf
+  nmap <buffer> <s-tab> mF
+  nmap <buffer><silent> nr :Rexplore<cr>
+endfunction
