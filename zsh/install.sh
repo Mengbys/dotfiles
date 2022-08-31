@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+
+mv ~/.zshrc ~/.zshrc.old  # make a backup
 mv ./.zshrc ~/.zshrc
 mv ./custom.zsh-theme ~/.oh-my-zsh/custom/themes/custom.zsh-theme
 
