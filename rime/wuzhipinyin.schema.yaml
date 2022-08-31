@@ -1,0 +1,145 @@
+# ut.schema.yaml
+# last change: 2022-06-16
+
+
+# 基于「朙月拼音」配置，使用简体字词库
+schema:
+  schema_id: wuzhipinyin
+  name: '吾之拼音'
+  version: '20220616'
+  author:
+    - "mengbys <1204887512@qq.com>"
+
+# 输入引擎
+engine:
+  filters:
+    - simplifier
+    - uniquifier
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - script_translator
+    - table_translator@abbr
+    - lua_translator@date_translator
+
+# 切换菜单
+switches:
+  - name: ascii_mode
+    reset: 1
+    states: ["中文", "西文"]
+  - name: full_shape
+    states: ["半角", "全角"]
+  - name: simplification
+    states: ["漢字", "汉字"]
+  - name: ascii_punct
+    states: ["。，", "．，"]
+
+# 快捷键
+key_binder:
+  bindings:
+    - {accept: "Control+p", send: Up, when: composing}
+    - {accept: "Control+n", send: Down, when: composing}
+    - {accept: "Control+b", send: Left, when: composing}
+    - {accept: "Control+f", send: Right, when: composing}
+    - {accept: "Control+a", send: Home, when: composing}
+    - {accept: "Control+e", send: End, when: composing}
+    - {accept: "Control+d", send: Delete, when: composing}
+    - {accept: "Control+k", send: "Shift+Delete", when: composing}
+    - {accept: "Control+h", send: BackSpace, when: composing}
+    - {accept: "Control+u", send: Escape, when: composing}
+    - {accept: ISO_Left_Tab, send: "Shift+Left", when: composing}
+    - {accept: "Shift+Tab", send: "Shift+Left", when: composing}
+    - {accept: Tab, send: "Shift+Right", when: composing}
+    - {accept: minus, send: Page_Up, when: has_menu}
+    - {accept: equal, send: Page_Down, when: has_menu}
+    - {accept: comma, send: Page_Up, when: paging}
+    - {accept: period, send: Page_Down, when: has_menu}
+  import_preset: default
+
+# 候选词数量
+menu:
+  page_size: 5
+
+# 符号表
+punctuator:
+  half_shape:
+    "\\" : "、"
+    "/" : "/"
+    _ : [ _, —— ]
+    "=" : "="
+    "`" : [ "`", · ]
+    "~" : "~"
+    "@" : "@"
+    "#" : "#"
+    "$" : "$"
+    "%" : "%"
+    "*" : "*"
+  symbols:
+    'vbl' : [ '~', ～, ˜, ≈, ≋, ≃, ≅, ≇, ∽, ⋍, ≌, ﹏, ﹋, ﹌ ]
+    'vpm' : [ '#', № ]
+    'vbf' : [ '%', ％, ‰, ‱ ]
+    'vwd' : [ '°', '℃', ℉ ]
+    'vch' : [ '*', ＊, ·, ・, ×, ※, ❂, ⁂, ☮, ☯, ☣ ]
+    'ix' : _
+  import_preset: symbols.custom
+
+# 处理符合特定规则的输入码
+recognizer:
+  import_preset: default
+  patterns:
+    email: "^[A-Za-z][-_.0-9A-Za-z]*@.*$"
+    # punct: "^v([0-9]0?|[A-Za-z]+)$"
+    punct: "^[vi]([0-9]0?|[A-Za-z]+)$"
+    uppercase: "[A-Z][-_+.'0-9A-Za-z]*$"
+    url: "^(www[.]|https?:|ftp[.:]|mailto:|file:).*$|^[a-z]+[.].+$"
+
+# 拼写处理器，可以在这里实现模糊纠错
+speller:
+  algebra:
+    - "erase/^xx$/"
+    - "abbrev/^([a-z]).+$/$1/"
+    - "abbrev/^([zcs]h).+$/$1/"
+    - "derive/^([nl])ve$/$1ue/"
+    - "derive/^([jqxy])u/$1v/"
+    - "derive/un$/uen/"
+    - "derive/ui$/uei/"
+    - "derive/iu$/iou/"
+    - "derive/([aeiou])ng$/$1gn/"
+    - "derive/([dtngkhrzcs])o(u|ng)$/$1o/"
+    - "derive/ong$/on/"
+    - "derive/ao$/oa/"
+    - "derive/([iu])a(o|ng?)$/a$1$2/"
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+
+# 根据编码列出候选词
+translator:
+  dictionary: pinyin_simp
+  preedit_format:
+    - "xform/([nl])v/$1ü/"
+    - "xform/([nl])ue/$1üe/"
+    - "xform/([jqxy])v/$1u/"
+
+# 个人词典
+abbr:
+  dictionary: ""
+  user_dict: abbr
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: 99
+

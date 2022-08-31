@@ -1,0 +1,18 @@
+# Rime table
+# coding: utf-8
+#@/db_name  abbr.txt
+#@/db_type	tabledb
+#
+# version: "2022-06-15"
+# 
+# 这个文件内的字词会占据最高权重（排在候选项的最前面）。
+#
+# 此行之后不能写注释
+
+1204887512	qq
+1204887512@qq.com	mail
+mengbys@163.com	mail
+mengbysbrs@gmail.com	mail
+13877587107	tel
+S2110W1010	xh
+

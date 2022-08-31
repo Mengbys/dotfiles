@@ -1,0 +1,28 @@
+# Rime dictionary
+# encoding: utf-8
+
+---
+name: pinyin_simp
+version: "1"
+sort: by_weight
+vocabulary: essay-zh-hans
+
+import_tables:
+  - cn_dicts/8105    # 《通用汉字规范表》8105 字字表
+
+
+  - cn_dicts/main    # 基础词库
+  - cn_dicts/ext     # 扩展词库，建议与基础词库一同使用
+  - cn_dicts/av      # 著名表演艺术家
+
+
+  - cn_dicts/others  # 一些杂项
+
+
+  # 按需选择，维基词库庞大，涵盖了很多不在词库的专业名词、人名、地名、影视名等等；
+  # 省去了很多额外的明星、地名、各个领域的专业词库。
+  # 但是错误也很多，词库太大了无法系统性修订，只能是随缘碰到了就修正一下。
+  # 也有一些很蛋疼的问题，比如「汉谟拉比」的五种写法：「汉摩拉比、汉漠拉比、汉漠拉比、汉莫拉比」→「汉谟拉比」
+  - cn_dicts/zhwiki  # 百万维基词库
+
+...

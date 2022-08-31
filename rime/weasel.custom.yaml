@@ -1,0 +1,6 @@
+# weasel.custom.yaml
+
+patch:
+  style/font_face: Microsoft YaHei
+  style/font_point: 14
+  style/layout/border_width: 2
