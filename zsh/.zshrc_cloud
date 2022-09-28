@@ -107,14 +107,27 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
-# My setting.
+# My setting
 # ===========
 # 1. general
 # ----------
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS="--height=40% --layout=reverse"
-alias fzfp="fzf --height=40% --layout=reverse --border=sharp --preview '(cat {} || tree -C {}) 2> /dev/null | head -200' --preview-window=:wrap,border-sharp"
+# use bat to preview
+alias fzfp="fzf --height=80% --layout=reverse --border=sharp \
+    --preview '(bat --color=always {} || tree -C {}) 2> /dev/null | head -200' \
+    --bind ctrl-b:preview-page-up,ctrl-f:preview-page-down \
+    --preview-window=:wrap,border-sharp"
+
+# add fd support
+export FZF_DEFAULT_COMMAND='fd --type f'
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
 
 # fff
 export FFF_HIDDEN=0
@@ -135,6 +148,7 @@ function setproxy() {
     git config --global http.proxy http://127.0.0.1:15732 
     git config --global https.proxy http://127.0.0.1:15732 
 }
+
 function unsetproxy() {
     unset {http,https}_proxy
     git config --global --unset http.proxy
@@ -169,7 +183,7 @@ export PATH=$PATH:/snap/bin/
 export PATH=$PATH:~/scripts/
 
 
-# 3. greeting
+# 3. Greeting
 # -----------
 printf  "\033[31m\
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢁⣿⣿⣿⣿⣿⣷⡘⣆⢿⣿⣿⣇⢸⣿⣿⡇⣼⣿⣶⡌⢧⡒⣸⣿⠟⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -201,3 +215,4 @@ printf  "\033[31m\
 
 \033[0m"
 echo "\033[5;38;5;255;48;5;20mWelcome $USER!\033[m"
+
