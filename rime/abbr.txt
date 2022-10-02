@@ -10,9 +10,8 @@
 # 此行之后不能写注释
 
 1204887512	qq
-1204887512@qq.com	mail
-mengbys@163.com	mail
-mengbysbrs@gmail.com	mail
-13877587107	tel
+1204887512@qq.com	yx
+mengbys@163.com	yx
+mengbysbrs@gmail.com	yx
+13877587107	dh
 S2110W1010	xh
-
