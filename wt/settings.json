@@ -4,32 +4,16 @@
     "actions": 
     [
         {
-            "command": "unbound",
-            "keys": "ctrl+v"
-        },
-        {
-            "command": "unbound",
-            "keys": "ctrl+c"
-        },
-        {
-            "command": "unbound",
-            "keys": "ctrl+insert"
-        },
-        {
-            "command": "unbound",
-            "keys": "shift+insert"
-        },
-        {
             "command": 
             {
                 "action": "copy",
                 "singleLine": false
             },
-            "keys": "ctrl+shift+c"
+            "keys": "ctrl+c"
         },
         {
             "command": "paste",
-            "keys": "ctrl+shift+v"
+            "keys": "ctrl+v"
         },
         {
             "command": "find",
@@ -43,88 +27,56 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+d"
-        },
-        {
-            "command": "toggleFocusMode",
-            "keys": "f12"
         }
     ],
+    "alwaysShowTabs": true,
+    "centerOnLaunch": true,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-    "experimental.rendering.forceFullRepaint": true,
-    "experimental.rendering.software": true,
-    "language": "zh-Hans-CN",
-    "launchMode": "default",
+    "initialPosition": ",",
+    "launchMode": "focus",
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles": 
     {
-        "defaults": 
-        {
-            "bellStyle": "none",
-            "closeOnExit": "always",
-            "colorScheme": "Tokyo Night Storm",
-            "cursorShape": "filledBox",
-            "font": 
-            {
-                "face": "BlexMono NF",
-                "size": 13
-            },
-            "intenseTextStyle": "all",
-            "padding": "0",
-            "scrollbarState": "hidden",
-            "suppressApplicationTitle": false
-        },
+        "defaults": {},
         "list": 
         [
             {
-                "antialiasingMode": "grayscale",
-                "backgroundImageAlignment": "center",
-                "backgroundImageOpacity": 0.37,
-                "backgroundImageStretchMode": "none",
-                "commandline": "D:\\powershell7\\7\\pwsh.exe",
+                "backgroundImage": null,
+                "backgroundImageAlignment": "right",
+                "backgroundImageOpacity": 0.4,
+                "backgroundImageStretchMode": "uniform",
+                "commandline": "C:\\disk\\powershell7\\7\\pwsh.exe",
+                "font": 
+                {
+                    "cellHeight": "1.2",
+                    "face": "MesloLGM Nerd Font Mono",
+                    "size": 11.0
+                },
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell"
+                "intenseTextStyle": "all",
+                "name": "Windows PowerShell",
+                "opacity": 80,
+                "useAcrylic": true
             },
             {
+                "commandline": "%SystemRoot%\\System32\\cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "\u547d\u4ee4\u63d0\u793a\u7b26"
             },
             {
-                "colorScheme": "SpaceDuck",
-                "commandline": "ssh luoxiaohong@49.123.124.215",
-                "guid": "{77998f54-634b-49a6-b8a9-41d141094174}",
+                "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": false,
-                "icon": "\ud83d\ude81",
-                "name": "luoxiaohong@49.123.124.215",
-                "suppressApplicationTitle": true,
-                "tabTitle": "luoxiaohong@49.123.124.215"
-            },
-            {
-                "colorScheme": "SpaceDuck",
-                "commandline": "ssh lxh@114.55.95.216",
-                "guid": "{8fb536f4-8aa8-48e9-994b-af3eec575f55}",
-                "hidden": false,
-                "icon": "\ud83d\ude81",
-                "name": "lxh@114.55.95.216",
-                "suppressApplicationTitle": true,
-                "tabTitle": "lxh@114.55.95.216"
-            },
-            {
-                "colorScheme": "SpaceDuck",
-                "font": 
-                {
-                    "face": "BlexMono NF",
-                    "size": 13
-                },
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-                "hidden": false,
-                "intenseTextStyle": "none",
-                "name": "Ubuntu 20.04",
-                "source": "Windows.Terminal.Wsl",
-                "suppressApplicationTitle": true,
-                "tabTitle": "Ubuntu 20.04"
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
             }
         ]
     },
@@ -218,7 +170,7 @@
             "name": "One Half Light",
             "purple": "#A626A4",
             "red": "#E45649",
-            "selectionBackground": "#FFFFFF",
+            "selectionBackground": "#4F525D",
             "white": "#FAFAFA",
             "yellow": "#C18301"
         },
@@ -264,32 +216,9 @@
             "name": "Solarized Light",
             "purple": "#D33682",
             "red": "#DC322F",
-            "selectionBackground": "#FFFFFF",
+            "selectionBackground": "#073642",
             "white": "#EEE8D5",
             "yellow": "#B58900"
-        },
-        {
-            "background": "#0F111B",
-            "black": "#000000",
-            "blue": "#00A3CC",
-            "brightBlack": "#686F9A",
-            "brightBlue": "#00A3CC",
-            "brightCyan": "#7A5CCC",
-            "brightGreen": "#5CCC96",
-            "brightPurple": "#F2CE00",
-            "brightRed": "#E33400",
-            "brightWhite": "#F0F1CE",
-            "brightYellow": "#B3A1E6",
-            "cursorColor": "#818596",
-            "cyan": "#7A5CCC",
-            "foreground": "#ECF0C1",
-            "green": "#5CCC96",
-            "name": "SpaceDuck",
-            "purple": "#F2CE00",
-            "red": "#E33400",
-            "selectionBackground": "#FFFFFF",
-            "white": "#686F9A",
-            "yellow": "#B3A1E6"
         },
         {
             "background": "#000000",
@@ -333,32 +262,9 @@
             "name": "Tango Light",
             "purple": "#75507B",
             "red": "#CC0000",
-            "selectionBackground": "#FFFFFF",
+            "selectionBackground": "#555753",
             "white": "#D3D7CF",
             "yellow": "#C4A000"
-        },
-        {
-            "background": "#24283B",
-            "black": "#414868",
-            "blue": "#7AA2F7",
-            "brightBlack": "#414868",
-            "brightBlue": "#7AA2F7",
-            "brightCyan": "#7DCFFF",
-            "brightGreen": "#73DACA",
-            "brightPurple": "#BB9AF7",
-            "brightRed": "#F7768E",
-            "brightWhite": "#C0CAF5",
-            "brightYellow": "#E0AF68",
-            "cursorColor": "#8A8896",
-            "cyan": "#7DCFFF",
-            "foreground": "#A9B1DC",
-            "green": "#73DACA",
-            "name": "Tokyo Night Storm",
-            "purple": "#BB9AF7",
-            "red": "#F7768E",
-            "selectionBackground": "#28344A",
-            "white": "#C0CAF5",
-            "yellow": "#E0AF68"
         },
         {
             "background": "#000000",
@@ -384,5 +290,9 @@
             "yellow": "#808000"
         }
     ],
+    "showTabsInTitlebar": true,
+    "tabWidthMode": "equal",
+    "theme": "legacyDark",
+    "themes": [],
     "useAcrylicInTabRow": true
 }

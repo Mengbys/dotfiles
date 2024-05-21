@@ -1,4 +1,4 @@
-# Windows: C:\Users\Bob\AppData\Local\clangd\config.yaml
-# Linus: ~/.config/clangd/config.yaml
+# Windows: C:\Users\user\AppData\Local\clangd\config.yaml
+# Linux: ~/.config/clangd/config.yaml
 CompileFlags:
   Add: ['-isystemD:/boost/include/boost-1_77/', --target=x86_64-pc-windows-gnu, -Wall]
