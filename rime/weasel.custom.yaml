@@ -4,3 +4,11 @@ patch:
   style/font_face: Microsoft YaHei
   style/font_point: 14
   style/layout/border_width: 2
+  style/layout/corner_radius: 0
+  style/layout/hilited_corner_radius: 0
+  style/layout/margin_x: 0
+  style/layout/margin_y: 0
+  style/layout/spacing: 0
+  style/layout/candidate_spacing: 0
+  style/layout/hilite_spacing: 0
+  style/layout/min_width: 0
