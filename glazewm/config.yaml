@@ -47,7 +47,7 @@ bar:
   opacity: 1.0
   background: "#20242cc4"
   foreground: "#ffffff"
-  font_family: "Segoe UI"
+  font_family: "Microsoft YaHei UI"
   font_size: "13px"
   padding: "4px 6px"
   offset_x: "0"
@@ -94,9 +94,6 @@ window_rules:
   - command: "ignore"
     match_process_name: "/Taskmgr|ScreenClippingHost/"
 
-  - command: "ignore"
-    match_process_name: "Snipaste"
-
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
     match_class_name: "#32770"
@@ -110,6 +107,19 @@ window_rules:
   # Some applications (eg. Steam) have borders that extend past the normal border size.
   - command: "resize borders 0px -7px -7px -7px"
     match_process_name: "steam"
+
+  # Custom applications settings
+  - command: "ignore"
+    match_process_name: "Snipaste"
+
+  - command: "ignore"
+    match_title: "便笺"
+
+  - command: "set floating"
+    match_title: "Clash for Windows"
+
+  - command: "set floating"
+    match_title: "UU加速器"
 
 binding_modes:
   - name: "resize"
@@ -130,23 +140,23 @@ binding_modes:
 keybindings:
   # Shift focus in a given direction.
   - command: "focus left"
-    bindings: ["Alt+H", "Alt+Left"]
+    bindings: ["Alt+H"]
   - command: "focus right"
-    bindings: ["Alt+L", "Alt+Right"]
+    bindings: ["Alt+L"]
   - command: "focus up"
-    bindings: ["Alt+K", "Alt+Up"]
+    bindings: ["Alt+K"]
   - command: "focus down"
-    bindings: ["Alt+J", "Alt+Down"]
+    bindings: ["Alt+J"]
 
   # Move focused window in a given direction.
   - command: "move left"
-    bindings: ["Alt+Shift+H", "Alt+Shift+Left", "Alt+A"]
+    bindings: ["Alt+Shift+H", "Alt+Left", "Alt+A"]
   - command: "move right"
-    bindings: ["Alt+Shift+L", "Alt+Shift+Right", "Alt+D"]
+    bindings: ["Alt+Shift+L", "Alt+Right", "Alt+D"]
   - command: "move up"
-    bindings: ["Alt+Shift+K", "Alt+Shift+Up", "Alt+W"]
+    bindings: ["Alt+Shift+K", "Alt+Up"]
   - command: "move down"
-    bindings: ["Alt+Shift+J", "Alt+Shift+Down", "Alt+S"]
+    bindings: ["Alt+Shift+J", "Alt+Down"]
 
   # Resize focused window by a percentage or pixel amount.
   - command: "resize width -2%"
@@ -181,11 +191,11 @@ keybindings:
 
   # Minimize focused window.
   - command: "set minimized"
-    binding: "Alt+M"
+    bindings: ["Alt+M", "Alt+S"]
 
   # Close focused window.
   - command: "close"
-    binding: "Alt+Q"
+    binding: "Alt+W"
 
   # Kill GlazeWM process safely.
   - command: "exit wm"
@@ -197,7 +207,7 @@ keybindings:
 
   # Launch CMD terminal (alternatively `exec wt` or `exec %ProgramFiles%/Git/git-bash.exe`
   # to start Windows Terminal and Git Bash respectively.
-  - command: "exec C:/disk/wt/WindowsTerminal.exe"
+  - command: "exec wt"
     binding: "Alt+Enter"
 
   # Focus the workspace that last had focus.
@@ -206,9 +216,9 @@ keybindings:
 
   # Focus the next/previous workspace defined in `workspaces` config.
   - command: "focus workspace next"
-    binding: "Alt+C"
+    binding: "Alt+E"
   - command: "focus workspace prev"
-    binding: "Alt+Z"
+    binding: "Alt+Q"
 
   # Change focus to a workspace defined in `workspaces` config.
   - command: "focus workspace 1"
@@ -259,3 +269,4 @@ keybindings:
     binding: "Alt+Shift+8"
   - commands: ["move to workspace 9", "focus workspace 9"]
     bindings: ["Alt+Shift+9"]
+
