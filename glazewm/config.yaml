@@ -3,7 +3,7 @@ general:
   focus_follows_cursor: false
 
   # Whether to jump the cursor between windows focused by the WM.
-  cursor_follows_focus: false
+  cursor_follows_focus: true
 
   # Whether to switch back and forth between the previously focused workspace
   # when focusing the current workspace.
@@ -115,11 +115,17 @@ window_rules:
   - command: "ignore"
     match_title: "便笺"
 
+  - command: "ignore"
+    match_title: "画中画"
+
   - command: "set floating"
     match_title: "Clash for Windows"
 
   - command: "set floating"
     match_title: "UU加速器"
+
+  - command: "set floating"
+    match_title: "计算器"
 
 binding_modes:
   - name: "resize"
