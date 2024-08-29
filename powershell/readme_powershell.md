@@ -7,16 +7,24 @@
 
 - winget
 
-`winget install JanDeDobbeleer.OhMyPosh -s winget`
+```
+winget install JanDeDobbeleer.OhMyPosh -s winget
+```
 
 - scoop
 
-`scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json`
+```
+scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
+```
 
 - manual
 
-`Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))`
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+```
 
 - choco
 
-`choco install oh-my-posh`
+```
+choco install oh-my-posh
+```
