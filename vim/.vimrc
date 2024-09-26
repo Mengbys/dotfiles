@@ -36,6 +36,8 @@ set wildmenu
 set mouse=a
 set nowrap
 set path+=**
+set hls
+set smartcase
 
 
 " Autocommand
